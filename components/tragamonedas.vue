@@ -1,25 +1,114 @@
 <template lang="pug">
     #sm
+        .prizes-rules
+          h2 prizes
+          br
+          prize(
+            :icons="[company[0], team[0], job[0]]"
+            prize="$200000"
+            comment="yeeee!"
+          )
+
+          prize(
+            :icons="[company[1], team[1], job[1]]"
+            prize="$150000"
+            comment="yeeee!"
+          )
+
+          prize(
+            :icons="[company[2], team[2], job[2]]"
+            prize="$150000"
+            comment="yeeee!"
+          )
+
+          prize(
+            :icons="[company[3], team[3], job[3]]"
+            prize="$150000"
+            comment="yeeee!"
+          )
+
+          prize(
+            :icons="[company[4], team[4], asterisk]"
+            prize="$150000"
+            comment="yeeee!"
+          )
+
+          br
+          h2 rules
+          br
+          rule(
+            :icon="company[3]"
+            comment="the comany is currently going through a shit-storm"
+          )
+        
         .group.lever
             button(v-on:click="run") Start
         .group
-            Reel(ref="r1")
-            Reel(ref="r2")
-            Reel(ref="r3")
+            Reel(ref="r1" :icons="company")
+            Reel(ref="r2" :icons="team")
+            Reel(ref="r3" :icons="job")
         .group
-          p company
-          p colleagues
-          p job
+          p COMPANY
+          p TEAM
+          p JOB
 
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {
+  faGem,
+  faHeart,
+  faRadiationAlt,
+  faPooStorm,
+  faMask,
+  faHatWizard,
+  faJedi,
+  faUserAstronaut,
+  faSave,
+  faDollarSign,
+  faHouseDamage,
+  faBrain,
+  faMedal,
+  faStarOfLife
+} from '@fortawesome/free-solid-svg-icons'
 import Reel from '@/components/reel'
+import Prize from '@/components/prize'
+import Rule from '@/components/rule'
 
 export default {
   name: 'Tragamonedas',
   components: {
-    Reel
+    FontAwesomeIcon,
+    Prize,
+    Reel,
+    Rule
+  },
+
+  data() {
+    return {
+      asterisk: faStarOfLife,
+      company: [
+        faGem,
+        faHeart,
+        faRadiationAlt,
+        faPooStorm,
+        faMedal,
+        faMedal,
+        faDollarSign
+      ],
+      team: [
+        faGem,
+        faHeart,
+        faPooStorm,
+        faMask,
+        faMedal,
+        faHatWizard,
+        faJedi,
+        faUserAstronaut
+      ],
+      job: [faGem, faHeart, faPooStorm, faMedal, faSave, faHouseDamage, faBrain]
+    }
   },
 
   methods: {
@@ -114,7 +203,7 @@ a {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
 
   width: 600px;
-  margin: 400px auto 20px;
+  margin: auto;
   padding: 20px;
   border-radius: 50px;
 }
@@ -176,6 +265,11 @@ a {
     rgba(251, 223, 147, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=0 );
+}
+
+.prizes-rules {
+  height: 300px;
+  margin-top: 30px;
 }
 
 .group {
@@ -243,25 +337,5 @@ a {
   color: #900;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   margin: 2px 0 -2px;
-}
-
-.msg {
-  text-align: center;
-  color: #bbb;
-  font-size: 1.8em;
-  padding: 25px 0 5px;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-a {
-  color: #222cff;
-  margin-top: 15px;
-  text-align: center;
-  display: block;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #ff4c00;
 }
 </style>

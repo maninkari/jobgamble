@@ -1,14 +1,31 @@
 <template lang="pug">
     .reel(:ref="id")
-        p {{icons[icons.length-1]}}
-        p(v-for="ic in icons") {{ic}}
-        p(v-for="ic in icons") {{ic}}
+        p 
+          font-awesome-icon(:icon="icons[icons.length-1]")
+        p(v-for="ic in icons") 
+          font-awesome-icon(:icon="ic")
+        p(v-for="ic in icons") 
+          font-awesome-icon(:icon="ic")
 </template>
+
 <script>
 import { TimelineMax } from 'gsap'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'Reel',
+
+  components: { FontAwesomeIcon },
+
+  props: {
+    icons: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
+
   data() {
     return {
       id: '',
@@ -18,16 +35,7 @@ export default {
       t: 0,
       tl: null,
       speed: Math.random() + 0.5,
-      r: (((Math.random() * 3) | 0) * 210) / 3,
-      icons: [
-        'cereza',
-        'triple 7',
-        'tragamonedas',
-        'trebol',
-        '2222',
-        '333',
-        '444'
-      ]
+      r: (((Math.random() * 3) | 0) * 210) / 3
     }
   },
 
@@ -134,11 +142,14 @@ export default {
   top: -48px;
 }
 .reel p {
+  font-size: 40px;
+}
+.reel p {
   font-weight: bold;
   height: 100px;
-  padding: 50% 0;
+  padding: 40% 0;
 }
-.reel p:nth-child(1) {
+/* .reel p:nth-child(1) {
   color: #c60;
 }
 .reel p:nth-child(2) {
@@ -146,5 +157,5 @@ export default {
 }
 .reel p:nth-child(3) {
   color: #630;
-}
+} */
 </style>
