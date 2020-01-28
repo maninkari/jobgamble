@@ -1,7 +1,9 @@
 <template lang="pug">
-    #sm
+  div
+    #tm
+      .box
         .prizes-rules
-          h2 prizes
+          h3 prizes
           br
           prize(
             :icons="[company[0], team[0], job[0]]"
@@ -28,30 +30,32 @@
           )
 
           prize(
-            :icons="[company[4], team[4], asterisk]"
+            :icons="[company[4], team[4], dash]"
             prize="$150000"
             comment="yeeee!"
           )
 
           br
-          h2 rules
+          h3 rules
           br
           rule(
             :icon="company[3]"
             comment="the comany is currently going through a shit-storm"
           )
-        
-        .group.lever
-            button(v-on:click="run") Start
         .group
-            Reel(ref="r1" :icons="company")
-            Reel(ref="r2" :icons="team")
-            Reel(ref="r3" :icons="job")
-        .group
-          p COMPANY
-          p TEAM
-          p JOB
-
+          Reel(ref="r1" :icons="company")
+          Reel(ref="r2" :icons="team")
+          Reel(ref="r3" :icons="job")
+          p company
+          p team
+          p job
+          
+      .leverdiv
+        svg.lever
+          rect(x="0" y="210" rx="10px" ry="10px" width="50" height="90" fill="grey")
+          line(x1="30" y1="20" x2="25" y2="210" style="stroke:rgb(30,30,30);stroke-width:7")
+          circle(cx="30" cy="25" r="20" stroke="ruby" stroke-width="4" fill="red" v-on:click="run")
+            
 </template>
 
 <script>
@@ -70,7 +74,7 @@ import {
   faHouseDamage,
   faBrain,
   faMedal,
-  faStarOfLife
+  faMinus
 } from '@fortawesome/free-solid-svg-icons'
 import Reel from '@/components/reel'
 import Prize from '@/components/prize'
@@ -87,7 +91,7 @@ export default {
 
   data() {
     return {
-      asterisk: faStarOfLife,
+      dash: faMinus,
       company: [
         faGem,
         faHeart,
@@ -153,20 +157,31 @@ body {
     url(https://subtlepatterns.com/patterns/texturetastic_gray.png);
 }
 
-h1 {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 1.75em;
-  font-weight: normal;
-  color: #bbb;
-}
-
 h1,
 a {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-#sm {
+#tm {
+  /* border-style: solid; */
+  width: 600px;
+  margin: auto;
+  padding: 5px;
+}
+
+.box,
+.leverdiv {
+  /* border-style: solid; */
+  padding: 0px;
+  display: inline-block;
+}
+
+.box {
+  background: rgb(238, 238, 238);
+  width: 90%;
+  border-radius: 50px;
+  vertical-align: middle;
+
   background: rgb(238, 238, 238);
   background: -moz-linear-gradient(
     top,
@@ -201,24 +216,27 @@ a {
     rgba(204, 204, 204, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+}
+.leverdiv {
+  width: 10%;
+  height: 400px;
+  vertical-align: middle;
+}
+.lever {
+  height: 100%;
+}
 
-  width: 600px;
-  margin: auto;
+.prizes-rules {
+  height: 300px;
   padding: 20px;
-  border-radius: 50px;
 }
 
-#sm,
-.lever button {
-  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.25);
-}
-.group,
-.reel,
-.lever {
+.group {
+  width: 100%;
+  border-radius: 30px;
+  padding: 5%;
   display: inline-block;
-}
-.group,
-.lever {
+
   background: rgb(252, 234, 187);
   background: -moz-linear-gradient(
     top,
@@ -267,75 +285,16 @@ a {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=0 );
 }
 
-.prizes-rules {
-  height: 300px;
-  margin-top: 30px;
-}
-
-.group {
-  border-radius: 30px;
-  padding: 20px 0 20px 20px;
+.group .reel {
+  width: 31%;
 }
 
 .group p {
-  width: 120px;
+  width: 33%;
   display: inline-block;
   text-align: center;
-  padding: 0px 10px 0px 5px;
-}
-
-.lever {
-  float: right;
-  padding-right: 20px;
-}
-.lever button {
-  text-align: center;
-  border-radius: 10px;
-  line-height: 100px;
-  width: 100px;
-  border: none;
-  font-size: 1.8em;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  background: rgb(252, 255, 244);
-  background: -moz-linear-gradient(
-    top,
-    rgba(252, 255, 244, 1) 0%,
-    rgba(233, 233, 206, 1) 100%
-  );
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0%, rgba(252, 255, 244, 1)),
-    color-stop(100%, rgba(233, 233, 206, 1))
-  );
-  background: -webkit-linear-gradient(
-    top,
-    rgba(252, 255, 244, 1) 0%,
-    rgba(233, 233, 206, 1) 100%
-  );
-  background: -o-linear-gradient(
-    top,
-    rgba(252, 255, 244, 1) 0%,
-    rgba(233, 233, 206, 1) 100%
-  );
-  background: -ms-linear-gradient(
-    top,
-    rgba(252, 255, 244, 1) 0%,
-    rgba(233, 233, 206, 1) 100%
-  );
-  background: linear-gradient(
-    to bottom,
-    rgba(252, 255, 244, 1) 0%,
-    rgba(233, 233, 206, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#e9e9ce',GradientType=0 );
-}
-.lever button:active {
-  color: #900;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  margin: 2px 0 -2px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: orange;
 }
 </style>

@@ -129,10 +129,9 @@ export default {
   text-align: center;
   float: left;
   padding: 0 10px;
-  width: 100px;
   height: 100px;
   overflow: hidden;
-  margin-right: 20px;
+  margin: 0px 5px;
   border-radius: 10px;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3) inset,
     0 0px 1px rgba(0, 0, 0, 0.2) inset;
@@ -147,15 +146,6 @@ export default {
 .reel p {
   font-weight: bold;
   height: 100px;
-  padding: 40% 0;
+  padding: 20% 0;
 }
-/* .reel p:nth-child(1) {
-  color: #c60;
-}
-.reel p:nth-child(2) {
-  color: #690;
-}
-.reel p:nth-child(3) {
-  color: #630;
-} */
 </style>
