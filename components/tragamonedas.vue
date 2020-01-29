@@ -1,6 +1,18 @@
 <template lang="pug">
   div
     #tm
+      .topdiv
+        svg
+          rect(x="240" y="10" rx="10px" ry="10px" width="50" height="60" fill="red")
+          
+          path(d="M50,200 C50,10 480,10 480,200" fill="lightblue")
+
+          g
+            path(
+              v-for="i in 20" 
+              :d="'M' + (60 + 10*i) + ',' + (220-5*i) + ' C' + (60 + 10*i) + ',' + (25 + 5*i) + ' ' + (470-10*i) + ',' + (25 + 5*i) + ' '+(470-10*i)+','+(220-5*i)" 
+              :fill="(i%2)?'purple':'white'"
+              :class="{'purple':(i%2), 'white':!(i%2)}")
       .box
         .prizes-rules
           h3 prizes
@@ -40,7 +52,7 @@
           br
           rule(
             :icon="company[3]"
-            comment="the comany is currently going through a shit-storm"
+            comment="the company is currently going through a shit-storm"
           )
         .group
           Reel(ref="r1" :icons="company")
@@ -60,6 +72,7 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { TimelineMax, Bounce } from 'gsap'
 import {
   faGem,
   faHeart,
@@ -120,6 +133,23 @@ export default {
       this.$refs.r1.spin()
       this.$refs.r2.spin()
       this.$refs.r3.spin()
+
+      const t = Math.max(
+        this.$refs.r1.tempo,
+        this.$refs.r2.tempo,
+        this.$refs.r3.tempo
+      )
+
+      const purples = document.getElementsByClassName('purple')
+      const tl = new TimelineMax()
+
+      tl.to(purples, t, {
+        fill: 'lavender',
+        ease: Bounce.easeInOut
+      }).to(purples, 0.5, {
+        fill: 'purple',
+        ease: Bounce.easeInOut
+      })
     }
   }
 }
@@ -169,11 +199,25 @@ a {
   padding: 5px;
 }
 
+.topdiv {
+  /* border-style: solid; */
+  padding: 0px;
+}
+
+.topdiv svg {
+  width: 100%;
+  height: 100%;
+}
+
 .box,
 .leverdiv {
   /* border-style: solid; */
   padding: 0px;
   display: inline-block;
+}
+
+.topdiv {
+  height: 200px;
 }
 
 .box {

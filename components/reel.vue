@@ -33,9 +33,9 @@ export default {
       scrollTopVal: 0,
       scrollTopMax: 0,
       t: 0,
+      tempo: 0,
       tl: null,
-      speed: Math.random() + 0.5,
-      r: (((Math.random() * 3) | 0) * 210) / 3
+      speed: Math.random() + 0.5
     }
   },
 
@@ -56,6 +56,8 @@ export default {
       const t2 = (this.t * this.scrollTopVal) / r
 
       const reel = this.$refs[this.id]
+
+      this.tempo = t1 + t2 * 2
 
       this.tl = new TimelineMax()
       this.tl
