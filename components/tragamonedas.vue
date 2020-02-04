@@ -16,21 +16,32 @@
       .box
         .prizes-rules
           h3 prizes
-          br
           prize(
-            v-for="p in prizes"
+            v-for="(p, index) in prizes"
+            :key="index"
             :icons="p.combination"
             :prize="p.prize"
             :note="p.note"
           )
 
-          br
           h3 rules
-          br
           rule(
-            :icon="company[7]"
-            comment="the company is currently going through a shit-storm"
+            :icon="icons.faBiohazard"
+            comment="toxic environment"
           )
+          rule(
+            :icon="icons.faBrain"
+            comment="brain being used"
+          )
+          rule(
+            :icon="icons.faGem"
+            comment="diamond"
+          )
+          rule(
+            :icon="icons.faHandHoldingUsd"
+            comment="good salaries"
+          )
+
         .group
           Reel(ref="r1" :icons="company")
           Reel(ref="r2" :icons="team")
@@ -92,6 +103,28 @@ export default {
   data() {
     return {
       dash: faMinus,
+      icons: {
+        faBiohazard,
+        faBrain,
+        faGem,
+        faHandHoldingUsd,
+        faHatWizard,
+        faHeart,
+        faHouseDamage,
+        faJournalWhills,
+        faLeaf,
+        faMask,
+        faMedal,
+        faMinus,
+        faPeace,
+        faPooStorm,
+        faPray,
+        faRadiation,
+        faSave,
+        faSpaceShuttle,
+        faSkullCrossbones,
+        faUserAstronaut
+      },
       company: [
         faGem,
         faHeart,
@@ -146,7 +179,7 @@ export default {
         },
         {
           combination: [faHandHoldingUsd, faHandHoldingUsd, faHandHoldingUsd],
-          prize: 512000,
+          prize: "512'000",
           note: 'WIN WIN'
         }
       ]
@@ -301,7 +334,11 @@ a {
 
 .prizes-rules {
   height: 300px;
-  padding: 20px;
+  padding: 15px;
+}
+
+.prizes-rules h3 {
+  padding: 15px 10px;
 }
 
 .group {
