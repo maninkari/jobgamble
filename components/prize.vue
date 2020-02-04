@@ -3,8 +3,8 @@
         p       
             span(v-for="ic in icons") 
                 font-awesome-icon(:icon="ic")
-        p {{prize}}
-        p {{comment}}
+        //- p.num(v-if="!!prize") {{prize}}
+        p.note(v-if="!!note") {{note}}
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
       type: String,
       default: ''
     },
-    comment: {
+    note: {
       type: String,
       default: ''
     }
@@ -36,9 +36,14 @@ export default {
 
 <style scoped>
 .prize p {
-  width: 120px;
+  width: 130px;
   display: inline-block;
   padding: 0px 10px 0px 5px;
+  font-weight: bold;
+}
+
+.prize .num {
+  text-align: right;
 }
 
 .prize p span {

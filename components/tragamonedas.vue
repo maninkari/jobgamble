@@ -18,40 +18,17 @@
           h3 prizes
           br
           prize(
-            :icons="[company[0], team[0], job[0]]"
-            prize="$200000"
-            comment="yeeee!"
-          )
-
-          prize(
-            :icons="[company[1], team[1], job[1]]"
-            prize="$150000"
-            comment="yeeee!"
-          )
-
-          prize(
-            :icons="[company[2], team[2], job[2]]"
-            prize="$150000"
-            comment="yeeee!"
-          )
-
-          prize(
-            :icons="[company[3], team[3], job[3]]"
-            prize="$150000"
-            comment="yeeee!"
-          )
-
-          prize(
-            :icons="[company[4], team[4], dash]"
-            prize="$150000"
-            comment="yeeee!"
+            v-for="p in prizes"
+            :icons="p.combination"
+            :prize="p.prize"
+            :note="p.note"
           )
 
           br
           h3 rules
           br
           rule(
-            :icon="company[3]"
+            :icon="company[7]"
             comment="the company is currently going through a shit-storm"
           )
         .group
@@ -74,24 +51,34 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { TimelineMax, Bounce } from 'gsap'
 import {
-  faGem,
-  faHeart,
-  faRadiationAlt,
-  faPooStorm,
-  faMask,
-  faHatWizard,
-  faJedi,
-  faUserAstronaut,
-  faSave,
-  faDollarSign,
-  faHouseDamage,
+  faBiohazard,
   faBrain,
+  faGem,
+  faHandHoldingUsd,
+  faHatWizard,
+  faHeart,
+  faHouseDamage,
+  faJournalWhills,
+  faLeaf,
+  faMask,
   faMedal,
-  faMinus
+  faMinus,
+  faPeace,
+  faPooStorm,
+  faPray,
+  faRadiation,
+  faSave,
+  faSpaceShuttle,
+  faSkullCrossbones,
+  faUserAstronaut
 } from '@fortawesome/free-solid-svg-icons'
-import Reel from '@/components/reel'
 import Prize from '@/components/prize'
+import Reel from '@/components/reel'
 import Rule from '@/components/rule'
+
+FontAwesomeIcon.config = {
+  autoAddCss: false
+}
 
 export default {
   name: 'Tragamonedas',
@@ -108,25 +95,65 @@ export default {
       company: [
         faGem,
         faHeart,
-        faRadiationAlt,
+        faMedal,
+        faHandHoldingUsd,
+        faPeace,
+        faSpaceShuttle,
+        faLeaf,
         faPooStorm,
-        faMedal,
-        faMedal,
-        faDollarSign
+        faRadiation,
+        faSkullCrossbones
       ],
       team: [
         faGem,
         faHeart,
+        faMedal,
+        faHandHoldingUsd,
+        faHatWizard,
+        faUserAstronaut,
+        faJournalWhills,
         faPooStorm,
         faMask,
-        faMedal,
-        faHatWizard,
-        faJedi,
-        faUserAstronaut
+        faBiohazard
       ],
-      job: [faGem, faHeart, faPooStorm, faMedal, faSave, faHouseDamage, faBrain]
+      job: [
+        faGem,
+        faHeart,
+        faMedal,
+        faHandHoldingUsd,
+        faBrain,
+        faUserAstronaut,
+        faSave,
+        faPooStorm,
+        faPray,
+        faHouseDamage
+      ],
+      prizes: [
+        {
+          combination: [faGem, faGem, faGem],
+          prize: "1'000'000",
+          note: 'WIN WIN WIN'
+        },
+        {
+          combination: [faHeart, faHeart, faHeart],
+          prize: "729'000",
+          note: 'WIN WIN WIN'
+        },
+        {
+          combination: [faMedal, faMedal, faMedal],
+          prize: "512'000",
+          note: 'WIN WIN'
+        },
+        {
+          combination: [faHandHoldingUsd, faHandHoldingUsd, faHandHoldingUsd],
+          prize: 512000,
+          note: 'WIN WIN'
+        }
+      ]
     }
   },
+
+  mounted() {},
 
   methods: {
     run() {
@@ -141,15 +168,17 @@ export default {
       )
 
       const purples = document.getElementsByClassName('purple')
-      const tl = new TimelineMax()
+      const timeline = new TimelineMax()
 
-      tl.to(purples, t, {
-        fill: 'lavender',
-        ease: Bounce.easeInOut
-      }).to(purples, 0.5, {
-        fill: 'purple',
-        ease: Bounce.easeInOut
-      })
+      timeline
+        .to(purples, t, {
+          fill: 'lavender',
+          ease: Bounce.easeInOut
+        })
+        .to(purples, 0.5, {
+          fill: 'purple',
+          ease: Bounce.easeInOut
+        })
     }
   }
 }
