@@ -5,6 +5,7 @@
   "author": "roberto",
   "private": true,
   "scripts": {
+    "deploy": "nuxt generate && cp -R dist/* ../public/ && firebase deploy",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
