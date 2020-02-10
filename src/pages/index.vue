@@ -1,16 +1,32 @@
 <template lang="pug">
   .container
-    div
-      //- logo
-      h1.title casino
-      h2.subtitle the job gamble
+    .badge
+      h1
+        nuxt-link(to="game") 
+          font-awesome-icon(:icon="badge")
+      h2.subtitle The Job Gamble
 </template>
 
 <script>
-export default {}
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faIdBadge } from '@fortawesome/free-solid-svg-icons'
+export default {
+  components: { FontAwesomeIcon },
+
+  data() {
+    return {
+      badge: faIdBadge
+    }
+  }
+}
 </script>
 
-<style>
+<style scoped>
+.badge {
+  font-size: 48px;
+  color: cadetblue;
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;

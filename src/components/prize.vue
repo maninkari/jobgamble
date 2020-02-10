@@ -1,6 +1,6 @@
 <template lang="pug">
     .prize
-        p       
+        p.combination 
             span(v-for="ic in icons") 
                 font-awesome-icon(:icon="ic")
         //- p.num(v-if="!!prize") {{prize}}
@@ -36,10 +36,15 @@ export default {
 
 <style scoped>
 .prize p {
-  width: 130px;
+  /* width: 100%; */
   display: inline-block;
   padding: 0px 10px 0px 5px;
   font-weight: bold;
+}
+
+p.combination {
+  width: 40%;
+  display: inline-block;
 }
 
 .prize .num {
@@ -48,5 +53,9 @@ export default {
 
 .prize p span {
   margin: 0px 3px;
+}
+
+p.note {
+  color: lime;
 }
 </style>

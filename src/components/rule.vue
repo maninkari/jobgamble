@@ -39,12 +39,13 @@ export default {
   padding: 0px 10px 0px 5px;
 }
 
-p .col {
-  width: 120px;
+p.col {
+  width: 20%;
 }
 
-p .comment {
+p.comment {
   width: auto;
+  font-size: small;
 }
 
 .rule p span {

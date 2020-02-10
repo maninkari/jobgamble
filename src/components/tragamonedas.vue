@@ -16,31 +16,43 @@
       .box
         .prizes-rules
           h3 prizes
-          prize(
-            v-for="(p, index) in prizes"
-            :key="index"
-            :icons="p.combination"
-            :prize="p.prize"
-            :note="p.note"
-          )
 
-          h3 rules
-          rule(
-            :icon="icons.faBiohazard"
-            comment="toxic environment"
-          )
-          rule(
-            :icon="icons.faBrain"
-            comment="brain being used"
-          )
-          rule(
-            :icon="icons.faGem"
-            comment="diamond"
-          )
-          rule(
-            :icon="icons.faHandHoldingUsd"
-            comment="good salaries"
-          )
+          .panel
+            .half1
+              prize(
+                v-for="(p, index) in prizes.slice(0, 4)"
+                :key="index"
+                :icons="p.combination"
+                :prize="p.prize"
+                :note="p.note"
+              )
+            .half2
+              prize(
+                v-for="(p, index) in prizes.slice(4)"
+                :key="index"
+                :icons="p.combination"
+                :prize="p.prize"
+                :note="p.note"
+              )
+
+          h3
+          .c1 
+            rule(v-for="(i, index) in icons.slice(0,7)"
+              :icon="i.icon"
+              :comment="i.desc"
+            )
+            
+          .c2
+            rule(v-for="(i, index) in icons.slice(7,14)"
+              :icon="i.icon"
+              :comment="i.desc"
+            )
+            
+          .c3
+            rule(v-for="(i, index) in icons.slice(14)"
+              :icon="i.icon"
+              :comment="i.desc"
+            )
 
         .group
           Reel(ref="r1" :icons="company")
@@ -69,7 +81,7 @@ import {
   faHatWizard,
   faHeart,
   faHouseDamage,
-  faJournalWhills,
+  faJedi,
   faLeaf,
   faMask,
   faMedal,
@@ -103,28 +115,27 @@ export default {
   data() {
     return {
       dash: faMinus,
-      icons: {
-        faBiohazard,
-        faBrain,
-        faGem,
-        faHandHoldingUsd,
-        faHatWizard,
-        faHeart,
-        faHouseDamage,
-        faJournalWhills,
-        faLeaf,
-        faMask,
-        faMedal,
-        faMinus,
-        faPeace,
-        faPooStorm,
-        faPray,
-        faRadiation,
-        faSave,
-        faSpaceShuttle,
-        faSkullCrossbones,
-        faUserAstronaut
-      },
+      icons: [
+        { icon: faBrain, desc: 'brain' },
+        { icon: faGem, desc: 'diamond' },
+        { icon: faMask, desc: 'double-faced' },
+        { icon: faLeaf, desc: 'eco' },
+        { icon: faSkullCrossbones, desc: 'evil' },
+        { icon: faPeace, desc: 'good' },
+        { icon: faSpaceShuttle, desc: 'high tech' },
+        { icon: faUserAstronaut, desc: 'highly skilled' },
+        { icon: faHouseDamage, desc: 'home damage' },
+        { icon: faJedi, desc: 'jedi' },
+        { icon: faSave, desc: 'legacy' },
+        { icon: faHeart, desc: 'love' },
+        { icon: faHandHoldingUsd, desc: 'money' },
+        { icon: faRadiation, desc: 'poluter' },
+        { icon: faPooStorm, desc: 'poo storm' },
+        { icon: faMedal, desc: 'recognition' },
+        { icon: faPray, desc: 'suffer' },
+        { icon: faBiohazard, desc: 'toxic' },
+        { icon: faHatWizard, desc: 'wizard' }
+      ],
       company: [
         faGem,
         faHeart,
@@ -144,7 +155,7 @@ export default {
         faHandHoldingUsd,
         faHatWizard,
         faUserAstronaut,
-        faJournalWhills,
+        faJedi,
         faPooStorm,
         faMask,
         faBiohazard
@@ -179,6 +190,21 @@ export default {
         },
         {
           combination: [faHandHoldingUsd, faHandHoldingUsd, faHandHoldingUsd],
+          prize: "512'000",
+          note: 'WIN'
+        },
+        {
+          combination: [faPeace, faHatWizard, faBrain],
+          prize: "512'000",
+          note: 'WIN WIN'
+        },
+        {
+          combination: [faSpaceShuttle, faUserAstronaut, faUserAstronaut],
+          prize: "512'000",
+          note: 'WIN WIN'
+        },
+        {
+          combination: [faLeaf, faJedi, faBrain],
           prize: "512'000",
           note: 'WIN WIN'
         }
@@ -218,32 +244,15 @@ export default {
 </script>
 
 <style scoped>
-body,
-div,
-h1,
-button,
 p {
   margin: 0;
   padding: 0;
-}
-button {
-  font-family: inherit;
-  font-size: inherit;
-  font-style: inherit;
-  font-weight: inherit;
 }
 a:active,
 a:focus {
   outline: 0;
 }
-/* } */
 
-body,
-input,
-select,
-textarea {
-  font: 18px/18px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
 body {
   background: #ddd
     url(https://subtlepatterns.com/patterns/texturetastic_gray.png);
@@ -269,6 +278,15 @@ a {
 .topdiv svg {
   width: 100%;
   height: 100%;
+}
+
+.c1,
+.c2,
+.c3 {
+  padding: 0px;
+  display: inline-block;
+  width: 33%;
+  vertical-align: top;
 }
 
 .box,
@@ -332,13 +350,33 @@ a {
   height: 100%;
 }
 
+.panel {
+  background-color: white;
+  border-radius: 10px;
+}
+
 .prizes-rules {
-  height: 300px;
+  height: 340px;
   padding: 15px;
 }
 
 .prizes-rules h3 {
   padding: 15px 10px;
+}
+
+.prizes-rules .half1,
+.prizes-rules .half2 {
+  width: 50%;
+  height: 90px;
+  padding: 10px 0px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: white;
+}
+
+.half1,
+.half2 {
+  border-radius: 10px;
 }
 
 .group {
