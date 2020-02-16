@@ -495,7 +495,7 @@ a {
   }
 
   .go rect {
-    fill: red;
+    fill: rgb(255, 50, 100);
   }
 
   .go text {

@@ -65,17 +65,17 @@ p.note {
 }
 @media only screen and (max-width: 600px) {
   p.combination {
-    width: 46%;
+    width: 48%;
   }
 
   p.note {
-    font-size: small;
-    width: 54%;
+    font-size: x-small;
+    width: 52%;
   }
 
   .prize p {
     /* width: 100%; */
-    padding: 0px 5px 0px 2px;
+    padding: 0px 0px 0px 5px;
   }
 }
 </style>
