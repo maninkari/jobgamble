@@ -51,4 +51,10 @@ p.comment {
 .rule p span {
   margin: 0px 3px;
 }
+
+@media only screen and (max-width: 600px) {
+  p.comment {
+    font-size: x-small;
+  }
+}
 </style>

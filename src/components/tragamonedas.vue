@@ -5,9 +5,9 @@
         svg
           rect(x="240" y="10" rx="10px" ry="10px" width="50" height="60" fill="red")
           
-          path(d="M50,200 C50,10 480,10 480,200" fill="lightblue")
+          path(d="M50,200 C50,10 480,10 480,200" fill="lightblue" class="psyco")
 
-          g
+          g(class="psyco")
             path(
               v-for="i in 20" 
               :d="'M' + (60 + 10*i) + ',' + (220-5*i) + ' C' + (60 + 10*i) + ',' + (25 + 5*i) + ' ' + (470-10*i) + ',' + (25 + 5*i) + ' '+(470-10*i)+','+(220-5*i)" 
@@ -54,6 +54,10 @@
               :comment="i.desc"
             )
 
+            svg.go
+              rect(x="0" y="0" rx="5" ry="5" width="40px" height="20px" v-on:click="run")
+              text(x="7" y="15" v-on:click="run") Go!
+          
         .group
           Reel(ref="r1" :icons="company")
           Reel(ref="r2" :icons="team")
@@ -263,13 +267,6 @@ a {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-#tm {
-  /* border-style: solid; */
-  width: 600px;
-  margin: auto;
-  padding: 5px;
-}
-
 .topdiv {
   /* border-style: solid; */
   padding: 0px;
@@ -444,5 +441,66 @@ a {
   margin-top: 10px;
   font-weight: bold;
   color: orange;
+}
+
+@media only screen and (min-width: 600px) {
+  #tm {
+    /* border-style: solid; */
+    width: 600px;
+    margin: auto;
+    padding: 5px;
+  }
+
+  .box {
+    width: 90%;
+  }
+
+  .c3 svg {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #tm {
+    /* border-style: solid; */
+    width: 100%;
+    margin: auto;
+    padding: 5px;
+  }
+
+  .box {
+    width: 100%;
+  }
+
+  .leverdiv {
+    display: none;
+  }
+
+  .group .reel {
+    width: 30%;
+  }
+
+  .topdiv {
+    height: 50px;
+  }
+
+  .psyco {
+    display: none;
+  }
+
+  .c3 svg {
+    padding: 15px 0px 0px 10px;
+    height: 40px;
+    width: 50px;
+  }
+
+  .go rect {
+    fill: red;
+  }
+
+  .go text {
+    fill: white;
+    font-weight: bold;
+  }
 }
 </style>

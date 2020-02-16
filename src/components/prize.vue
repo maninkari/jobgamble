@@ -43,7 +43,6 @@ export default {
 }
 
 p.combination {
-  width: 40%;
   display: inline-block;
 }
 
@@ -57,5 +56,26 @@ p.combination {
 
 p.note {
   color: lime;
+}
+
+@media only screen and (min-width: 600px) {
+  p.combination {
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  p.combination {
+    width: 46%;
+  }
+
+  p.note {
+    font-size: small;
+    width: 54%;
+  }
+
+  .prize p {
+    /* width: 100%; */
+    padding: 0px 5px 0px 2px;
+  }
 }
 </style>
