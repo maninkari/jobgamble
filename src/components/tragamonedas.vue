@@ -79,7 +79,7 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { TimelineMax } from 'gsap'
+import { TimelineMax, Bounce } from 'gsap'
 import {
   faBiohazard,
   faBrain,
@@ -239,10 +239,10 @@ export default {
 
       timeline
         .to(lever[0].children[2], 0.25, {
-          cy: 70
+          attr: { cy: 70 }
         })
         .to(lever[0].children[2], 0.5, {
-          cy: 25
+          attr: { cy: 25 }
         })
         .to(
           lever[0].children[1],
@@ -264,12 +264,14 @@ export default {
           purples,
           t,
           {
-            fill: 'lavender'
+            attr: { fill: 'lavender' },
+            ease: Bounce.easeInOut
           },
           0
         )
         .to(purples, 0.25, {
-          fill: 'purple'
+          attr: { fill: 'purple' },
+          ease: Bounce.easeInOut
         })
     }
   }
