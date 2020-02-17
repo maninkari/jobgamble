@@ -2,9 +2,15 @@
   .container
     .badge
       h1
-        nuxt-link(to="game") 
+        nuxt-link(
+          to="game" 
+          v-for="(i, index) in 3"
+          :key="index" 
+          style="padding:5px"
+        ) 
           font-awesome-icon(:icon="badge")
       h2.subtitle The Job Gamble
+      p Are you in the right job? How many games will you play?
 </template>
 
 <script>
@@ -49,12 +55,17 @@ export default {
 .subtitle {
   font-weight: 300;
   font-size: 42px;
-  color: #526488;
+  color: black;
   word-spacing: 5px;
   padding-bottom: 15px;
 }
 
 .links {
   padding-top: 15px;
+}
+
+p {
+  color: gray;
+  font-size: 14px;
 }
 </style>

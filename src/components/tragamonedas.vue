@@ -38,18 +38,21 @@
           h3
           .c1 
             rule(v-for="(i, index) in icons.slice(0,7)"
+              :key="index"
               :icon="i.icon"
               :comment="i.desc"
             )
             
           .c2
             rule(v-for="(i, index) in icons.slice(7,14)"
+              :key="index"
               :icon="i.icon"
               :comment="i.desc"
             )
             
           .c3
             rule(v-for="(i, index) in icons.slice(14)"
+              :key="index"
               :icon="i.icon"
               :comment="i.desc"
             )
@@ -69,14 +72,14 @@
       .leverdiv
         svg.lever
           rect(x="0" y="210" rx="10px" ry="10px" width="50" height="90" fill="grey")
-          line(x1="30" y1="20" x2="25" y2="210" style="stroke:rgb(30,30,30);stroke-width:7")
+          line(x1="30" y1="20" x2="25" y2="230" style="stroke:rgb(30,30,30);stroke-width:7")
           circle(cx="30" cy="25" r="20" stroke="ruby" stroke-width="4" fill="red" v-on:click="run")
             
 </template>
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { TimelineMax, Bounce } from 'gsap'
+import { TimelineMax } from 'gsap'
 import {
   faBiohazard,
   faBrain,
@@ -134,7 +137,7 @@ export default {
         { icon: faHeart, desc: 'love' },
         { icon: faHandHoldingUsd, desc: 'money' },
         { icon: faRadiation, desc: 'poluter' },
-        { icon: faPooStorm, desc: 'poo storm' },
+        { icon: faPooStorm, desc: 'shit storm' },
         { icon: faMedal, desc: 'recognition' },
         { icon: faPray, desc: 'suffer' },
         { icon: faBiohazard, desc: 'toxic' },
@@ -231,16 +234,42 @@ export default {
       )
 
       const purples = document.getElementsByClassName('purple')
+      const lever = document.getElementsByClassName('lever')
       const timeline = new TimelineMax()
 
       timeline
-        .to(purples, t, {
-          fill: 'lavender',
-          ease: Bounce.easeInOut
+        .to(lever[0].children[2], 0.25, {
+          cy: 70
         })
-        .to(purples, 0.5, {
-          fill: 'purple',
-          ease: Bounce.easeInOut
+        .to(lever[0].children[2], 0.5, {
+          cy: 25
+        })
+        .to(
+          lever[0].children[1],
+          0.25,
+          {
+            attr: { y1: 60 }
+          },
+          0
+        )
+        .to(
+          lever[0].children[1],
+          0.5,
+          {
+            attr: { y1: 20 }
+          },
+          0.25
+        )
+        .to(
+          purples,
+          t,
+          {
+            fill: 'lavender'
+          },
+          0
+        )
+        .to(purples, 0.25, {
+          fill: 'purple'
         })
     }
   }
