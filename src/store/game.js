@@ -22,6 +22,8 @@ import {
 
 export const state = () => ({
   counter: 0,
+  running: false,
+  lifes: 3,
   icons: [
     { icon: faBrain, desc: 'brain' },
     { icon: faGem, desc: 'diamond' },
@@ -119,6 +121,12 @@ export const state = () => ({
 })
 
 export const getters = {
+  getRunning(state) {
+    return state.running
+  },
+  getLifes(state) {
+    return state.lifes
+  },
   getIcons(state) {
     return state.icons
   },
@@ -139,5 +147,14 @@ export const getters = {
 export const mutations = {
   increment(state) {
     state.counter++
+  },
+  decrLife(state) {
+    state.lifes--
+  },
+  setLifes(state, n) {
+    state.lifes = n
+  },
+  setRunning(state, b) {
+    state.running = b
   }
 }

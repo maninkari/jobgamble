@@ -1,5 +1,7 @@
 <template lang="pug">
   div
+    p(v-if="lifes > 0") {{lifes}}
+    p(v-else) Game Over
     #tm
       .topdiv
         svg
@@ -78,7 +80,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { TimelineMax, Bounce } from 'gsap'
 import Prize from '@/components/prize'
@@ -99,11 +101,15 @@ export default {
   },
 
   data() {
-    return {}
+    return {
+      timeline: null
+    }
   },
 
   computed: {
     ...mapGetters({
+      running: 'game/getRunning',
+      lifes: 'game/getLifes',
       icons: 'game/getIcons',
       company: 'game/getCompany',
       team: 'game/getTeam',
@@ -115,22 +121,28 @@ export default {
   mounted() {},
 
   methods: {
-    run() {
-      this.$refs.r1.spin()
-      this.$refs.r2.spin()
-      this.$refs.r3.spin()
+    ...mapMutations({
+      setLifes: 'game/setLifes',
+      setRunning: 'game/setRunning'
+    }),
 
-      const t = Math.max(
-        this.$refs.r1.tempo,
-        this.$refs.r2.tempo,
-        this.$refs.r3.tempo
-      )
+    done() {
+      // eslint-disable-next-line
+      console.log('holaaaaaaa')
+      this.setRunning(false)
+      this.setLifes(this.lifes - 1)
+    },
 
+    play(t) {
       const purples = document.getElementsByClassName('purple')
       const lever = document.getElementsByClassName('lever')
-      const timeline = new TimelineMax()
 
-      timeline
+      this.timeline = new TimelineMax({
+        paused: true,
+        onComplete: this.done
+      })
+
+      this.timeline
         .to(lever[0].children[2], 0.25, {
           attr: { cy: 70 }
         })
@@ -166,6 +178,26 @@ export default {
           attr: { fill: 'purple' },
           ease: Bounce.easeInOut
         })
+
+      this.timeline.play()
+    },
+
+    run() {
+      if (this.running) return
+
+      this.setRunning(true)
+
+      this.$refs.r1.spin()
+      this.$refs.r2.spin()
+      this.$refs.r3.spin()
+
+      const t = Math.max(
+        this.$refs.r1.tempo,
+        this.$refs.r2.tempo,
+        this.$refs.r3.tempo
+      )
+
+      this.play(t)
     }
   }
 }
