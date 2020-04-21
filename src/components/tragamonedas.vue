@@ -100,6 +100,8 @@ export default {
     Rule
   },
 
+  transition: 'gameover',
+
   data() {
     return {
       timeline: null
@@ -109,7 +111,7 @@ export default {
   computed: {
     ...mapGetters({
       running: 'game/getRunning',
-      lifes: 'game/getLifes',
+      lifes: 'getLifes',
       icons: 'game/getIcons',
       company: 'game/getCompany',
       team: 'game/getTeam',
@@ -122,15 +124,54 @@ export default {
 
   methods: {
     ...mapMutations({
-      setLifes: 'game/setLifes',
+      setLifes: 'setLifes',
       setRunning: 'game/setRunning'
     }),
 
     done() {
-      // eslint-disable-next-line
-      console.log('holaaaaaaa')
-      this.setRunning(false)
       this.setLifes(this.lifes - 1)
+
+      const comb = {
+        i1: this.company[this.$refs.r1.selectedIconInd - 1].iconName,
+        i2: this.team[this.$refs.r2.selectedIconInd - 1].iconName,
+        i3: this.job[this.$refs.r3.selectedIconInd - 1].iconName
+      }
+
+      let winFlag = false
+
+      this.prizes.forEach((item, index) => {
+        if (
+          item.combination[0].iconName === comb.i1 &&
+          item.combination[1].iconName === comb.i2 &&
+          item.combination[2].iconName === comb.i3
+        ) {
+          winFlag = true
+
+          this.$refs.r1.win()
+          this.$refs.r2.win()
+          this.$refs.r3.win()
+          return item
+        }
+      })
+
+      const _ = this
+
+      const p = new Promise(function(resolve, reject) {
+        setTimeout(
+          function() {
+            resolve()
+          },
+          winFlag || _.lifes === 0 ? 2500 : 0
+        )
+      })
+
+      p.then(function() {
+        _.setRunning(false)
+
+        if (_.lifes === 0) {
+          _.$router.push('gameover')
+        }
+      })
     },
 
     play(t) {
@@ -183,7 +224,7 @@ export default {
     },
 
     run() {
-      if (this.running) return
+      if (this.running || this.lifes === 0) return
 
       this.setRunning(true)
 
@@ -396,7 +437,7 @@ a {
   text-align: center;
   margin-top: 10px;
   font-weight: bold;
-  color: orange;
+  color: darkorange;
 }
 
 @media only screen and (min-width: 600px) {

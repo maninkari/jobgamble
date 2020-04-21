@@ -23,7 +23,6 @@ import {
 export const state = () => ({
   counter: 0,
   running: false,
-  lifes: 3,
   icons: [
     { icon: faBrain, desc: 'brain' },
     { icon: faGem, desc: 'diamond' },
@@ -47,39 +46,39 @@ export const state = () => ({
   ],
   company: [
     faGem,
-    faHeart,
-    faMedal,
-    faHandHoldingUsd,
-    faPeace,
-    faSpaceShuttle,
-    faLeaf,
-    faPooStorm,
-    faRadiation,
-    faSkullCrossbones
+    faHeart
+    // faMedal,
+    // faHandHoldingUsd,
+    // faPeace,
+    // faSpaceShuttle,
+    // faLeaf,
+    // faPooStorm,
+    // faRadiation,
+    // faSkullCrossbones
   ],
   team: [
     faGem,
-    faHeart,
-    faMedal,
-    faHandHoldingUsd,
-    faHatWizard,
-    faUserAstronaut,
-    faJedi,
-    faPooStorm,
-    faMask,
-    faBiohazard
+    faHeart
+    // faMedal,
+    // faHandHoldingUsd,
+    // faHatWizard,
+    // faUserAstronaut,
+    // faJedi,
+    // faPooStorm,
+    // faMask,
+    // faBiohazard
   ],
   job: [
     faGem,
-    faHeart,
-    faMedal,
-    faHandHoldingUsd,
-    faBrain,
-    faUserAstronaut,
-    faSave,
-    faPooStorm,
-    faPray,
-    faHouseDamage
+    faHeart
+    // faMedal,
+    // faHandHoldingUsd,
+    // faBrain,
+    // faUserAstronaut,
+    // faSave,
+    // faPooStorm,
+    // faPray,
+    // faHouseDamage
   ],
   prizes: [
     {
@@ -91,41 +90,38 @@ export const state = () => ({
       combination: [faHeart, faHeart, faHeart],
       prize: "729'000",
       note: 'WIN WIN WIN'
-    },
-    {
-      combination: [faMedal, faMedal, faMedal],
-      prize: "512'000",
-      note: 'WIN WIN'
-    },
-    {
-      combination: [faHandHoldingUsd, faHandHoldingUsd, faHandHoldingUsd],
-      prize: "512'000",
-      note: 'WIN'
-    },
-    {
-      combination: [faPeace, faHatWizard, faBrain],
-      prize: "512'000",
-      note: 'WIN WIN'
-    },
-    {
-      combination: [faSpaceShuttle, faUserAstronaut, faUserAstronaut],
-      prize: "512'000",
-      note: 'WIN WIN'
-    },
-    {
-      combination: [faLeaf, faJedi, faBrain],
-      prize: "512'000",
-      note: 'WIN WIN'
     }
+    // {
+    //   combination: [faMedal, faMedal, faMedal],
+    //   prize: "512'000",
+    //   note: 'WIN WIN'
+    // },
+    // {
+    //   combination: [faHandHoldingUsd, faHandHoldingUsd, faHandHoldingUsd],
+    //   prize: "512'000",
+    //   note: 'WIN'
+    // },
+    // {
+    //   combination: [faPeace, faHatWizard, faBrain],
+    //   prize: "512'000",
+    //   note: 'WIN WIN'
+    // },
+    // {
+    //   combination: [faSpaceShuttle, faUserAstronaut, faUserAstronaut],
+    //   prize: "512'000",
+    //   note: 'WIN WIN'
+    // },
+    // {
+    //   combination: [faLeaf, faJedi, faBrain],
+    //   prize: "512'000",
+    //   note: 'WIN WIN'
+    // }
   ]
 })
 
 export const getters = {
   getRunning(state) {
     return state.running
-  },
-  getLifes(state) {
-    return state.lifes
   },
   getIcons(state) {
     return state.icons
@@ -147,12 +143,6 @@ export const getters = {
 export const mutations = {
   increment(state) {
     state.counter++
-  },
-  decrLife(state) {
-    state.lifes--
-  },
-  setLifes(state, n) {
-    state.lifes = n
   },
   setRunning(state, b) {
     state.running = b
