@@ -1,20 +1,9 @@
 <template lang="pug">
   div
-    p(v-if="lifes > 0") {{lifes}}
-    p(v-else) Game Over
     #tm
       .topdiv
-        svg
-          rect(x="240" y="10" rx="10px" ry="10px" width="50" height="60" fill="red")
-          
-          path(d="M50,200 C50,10 480,10 480,200" fill="lightblue" class="psyco")
+        psycodelia(ref="psyco")
 
-          g(class="psyco")
-            path(
-              v-for="i in 20" 
-              :d="'M' + (60 + 10*i) + ',' + (220-5*i) + ' C' + (60 + 10*i) + ',' + (25 + 5*i) + ' ' + (470-10*i) + ',' + (25 + 5*i) + ' '+(470-10*i)+','+(220-5*i)" 
-              :fill="(i%2)?'purple':'white'"
-              :class="{'purple':(i%2), 'white':!(i%2)}")
       .box
         .prizes-rules
           h3 prizes
@@ -70,20 +59,16 @@
           p company
           p team
           p job
-          
-      .leverdiv
-        svg.lever
-          rect(x="0" y="210" rx="10px" ry="10px" width="50" height="90" fill="grey")
-          line(x1="30" y1="20" x2="25" y2="230" style="stroke:rgb(30,30,30);stroke-width:7")
-          circle(cx="30" cy="25" r="20" stroke="ruby" stroke-width="4" fill="red" v-on:click="run")
-            
+
+      lever.leverComp(ref="lev" :f="run" :f2="done")            
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { TimelineMax, Bounce } from 'gsap'
+import Lever from '@/components/lever'
 import Prize from '@/components/prize'
+import Psycodelia from '@/components/psycodelia'
 import Reel from '@/components/reel'
 import Rule from '@/components/rule'
 
@@ -95,7 +80,9 @@ export default {
   name: 'Tragamonedas',
   components: {
     FontAwesomeIcon,
+    Lever,
     Prize,
+    Psycodelia,
     Reel,
     Rule
   },
@@ -131,25 +118,20 @@ export default {
     done() {
       this.setLifes(this.lifes - 1)
 
-      const comb = {
-        i1: this.company[this.$refs.r1.selectedIconInd - 1].iconName,
-        i2: this.team[this.$refs.r2.selectedIconInd - 1].iconName,
-        i3: this.job[this.$refs.r3.selectedIconInd - 1].iconName
-      }
-
       let winFlag = false
 
       this.prizes.forEach((item, index) => {
         if (
-          item.combination[0].iconName === comb.i1 &&
-          item.combination[1].iconName === comb.i2 &&
-          item.combination[2].iconName === comb.i3
+          item.combination[0].iconName === this.$refs.r1.selectedIcon &&
+          item.combination[1].iconName === this.$refs.r2.selectedIcon &&
+          item.combination[2].iconName === this.$refs.r3.selectedIcon
         ) {
           winFlag = true
 
           this.$refs.r1.win()
           this.$refs.r2.win()
           this.$refs.r3.win()
+
           return item
         }
       })
@@ -175,52 +157,8 @@ export default {
     },
 
     play(t) {
-      const purples = document.getElementsByClassName('purple')
-      const lever = document.getElementsByClassName('lever')
-
-      this.timeline = new TimelineMax({
-        paused: true,
-        onComplete: this.done
-      })
-
-      this.timeline
-        .to(lever[0].children[2], 0.25, {
-          attr: { cy: 70 }
-        })
-        .to(lever[0].children[2], 0.5, {
-          attr: { cy: 25 }
-        })
-        .to(
-          lever[0].children[1],
-          0.25,
-          {
-            attr: { y1: 60 }
-          },
-          0
-        )
-        .to(
-          lever[0].children[1],
-          0.5,
-          {
-            attr: { y1: 20 }
-          },
-          0.25
-        )
-        .to(
-          purples,
-          t,
-          {
-            attr: { fill: 'lavender' },
-            ease: Bounce.easeInOut
-          },
-          0
-        )
-        .to(purples, 0.25, {
-          attr: { fill: 'purple' },
-          ease: Bounce.easeInOut
-        })
-
-      this.timeline.play()
+      this.$refs.lev.play(t)
+      this.$refs.psyco.play(t)
     },
 
     run() {
@@ -334,14 +272,6 @@ a {
     rgba(204, 204, 204, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
-}
-.leverdiv {
-  width: 10%;
-  height: 400px;
-  vertical-align: middle;
-}
-.lever {
-  height: 100%;
 }
 
 .panel {
@@ -469,20 +399,16 @@ a {
     width: 100%;
   }
 
-  .leverdiv {
-    display: none;
-  }
-
   .group .reel {
     width: 30%;
   }
 
-  .topdiv {
-    height: 50px;
+  .leverComp {
+    display: none;
   }
 
-  .psyco {
-    display: none;
+  .topdiv {
+    height: 50px;
   }
 
   .c3 svg {

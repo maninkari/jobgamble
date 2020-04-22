@@ -1,9 +1,9 @@
 <template lang="pug">
-    .rule
-        p.col
-            span
-                font-awesome-icon(:icon="icon")
-        p.comment {{comment}}
+  .rule
+    p.col
+      span
+        font-awesome-icon(:icon="icon")
+    p.comment {{comment}}
 </template>
 
 <script>

@@ -32,7 +32,7 @@ export default {
       scrollTopPrv: 0,
       scrollTopVal: 0,
       scrollTopMax: 0,
-      selectedIconInd: 0,
+      selectedIcon: '',
       t: 0,
       tempo: 0,
       tl: null,
@@ -48,12 +48,10 @@ export default {
   methods: {
     spin() {
       this.t = 2 + Math.random()
-      this.selectedIconInd = Math.ceil(Math.random() * this.icons.length)
+      const ind = Math.ceil(Math.random() * this.icons.length)
+      this.selectedIcon = this.icons[ind - 1].iconName
       this.scrollTopPrv = this.scrollTopVal
-      this.scrollTopVal = 100 * this.selectedIconInd
-
-      // eslint-disable-next-line
-      console.log(this.selectedIconInd)
+      this.scrollTopVal = 100 * ind
 
       const r = this.scrollTopMax - this.scrollTopPrv + this.scrollTopVal
       const t1 = (this.t * (this.scrollTopMax - this.scrollTopPrv)) / r
@@ -163,7 +161,7 @@ export default {
   background: #fff;
   background: -moz-linear-gradient(
     top,
-    rgba(255, 255, 255, 1) 0%,
+    rgba(173, 216, 230, 1) 0%,
     rgba(241, 241, 241, 1) 50%,
     rgba(225, 225, 225, 1) 51%,
     rgba(246, 246, 246, 1) 100%
@@ -172,38 +170,38 @@ export default {
     linear,
     left top,
     left bottom,
-    color-stop(0%, rgba(255, 255, 255, 1)),
+    color-stop(0%, rgba(173, 216, 230, 1)),
     color-stop(50%, rgba(241, 241, 241, 1)),
     color-stop(51%, rgba(225, 225, 225, 1)),
     color-stop(100%, rgba(246, 246, 246, 1))
   );
   background: -webkit-linear-gradient(
     top,
-    rgba(255, 255, 255, 1) 0%,
+    rgb(173, 216, 230) 0%,
     rgba(241, 241, 241, 1) 50%,
     rgba(225, 225, 225, 1) 51%,
     rgba(246, 246, 246, 1) 100%
   );
   background: -o-linear-gradient(
     top,
-    rgba(255, 255, 255, 1) 0%,
+    rgb(173, 216, 230) 0%,
     rgba(241, 241, 241, 1) 50%,
     rgba(225, 225, 225, 1) 51%,
     rgba(246, 246, 246, 1) 100%
   );
   background: -ms-linear-gradient(
     top,
-    rgba(255, 255, 255, 1) 0%,
+    rgb(173, 216, 230) 0%,
     rgba(241, 241, 241, 1) 50%,
     rgba(225, 225, 225, 1) 51%,
     rgba(246, 246, 246, 1) 100%
   );
   background: linear-gradient(
     to bottom,
-    rgb(170, 205, 240) 0%,
-    rgb(247, 88, 225) 50%,
-    rgb(233, 27, 27) 51%,
-    rgb(170, 200, 240) 100%
+    rgb(173, 216, 230) 0%,
+    rgba(241, 241, 241, 1) 50%,
+    rgba(225, 225, 225, 1) 51%,
+    rgba(246, 246, 246, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
 
@@ -224,10 +222,12 @@ export default {
 }
 .reel p {
   font-size: 40px;
-}
-.reel p {
   font-weight: bold;
   height: 100px;
   padding: 20% 0;
+}
+
+.reelwin path {
+  fill: red;
 }
 </style>

@@ -10,7 +10,7 @@
         ) 
           font-awesome-icon(:icon="badge")
       h2.subtitle The Job Gamble
-      p Are you in the right job? How many games will you play?
+      p Where Dreams Come True
 </template>
 
 <script>
