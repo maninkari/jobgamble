@@ -66,6 +66,6 @@ export default {
 
 p {
   color: gray;
-  font-size: 14px;
+  font-size: 18px;
 }
 </style>

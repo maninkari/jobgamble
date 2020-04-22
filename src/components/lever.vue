@@ -4,7 +4,7 @@
       rect(x="0" y="210" rx="10px" ry="10px" width="50" height="90" fill="grey")
       line(x1="30" y1="20" x2="25" y2="230" style="stroke:rgb(30,30,30);stroke-width:7")
       circle(cx="30" cy="25" r="20" stroke="ruby" stroke-width="4" fill="red" v-on:click="f")
-      circle(cx="35" cy="17" r="5" stroke="ruby" stroke-width="4" fill="white" v-on:click="f")
+      circle(cx="35" cy="17" r="5" stroke="ruby" stroke-width="4" fill="pink" v-on:click="f")
 </template>
 
 <script>

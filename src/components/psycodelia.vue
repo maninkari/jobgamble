@@ -2,7 +2,7 @@
   svg
     rect(x="240" y="10" rx="10px" ry="10px" width="50" height="60" fill="red")
     
-    path(d="M50,200 C50,10 480,10 480,200" fill="lightblue" class="psyco")
+    path(d="M50,200 C50,10 480,10 480,200" fill="lightblue" class="psyco glass")
 
     g(class="psyco")
       path(
@@ -29,6 +29,7 @@ export default {
   methods: {
     play(t) {
       const purples = document.getElementsByClassName('purple')
+      const glass = document.getElementsByClassName('glass')
 
       this.timeline = new TimelineMax({
         paused: true,
@@ -49,6 +50,22 @@ export default {
           attr: { fill: 'purple' },
           ease: Bounce.easeInOut
         })
+        .to(
+          glass,
+          0,
+          {
+            attr: { fill: '#dbeef0' }
+          },
+          0
+        )
+        .to(
+          glass,
+          0,
+          {
+            attr: { fill: 'lightblue' }
+          },
+          t
+        )
 
       this.timeline.play()
     }

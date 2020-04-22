@@ -1,5 +1,7 @@
 <template lang="pug">
   div
+    font-awesome-icon.badges(:icon="badge" :key="index" v-for="(i, index) in lifes")
+
     #tm
       .topdiv
         psycodelia(ref="psyco")
@@ -7,8 +9,7 @@
       .box
         .prizes-rules
           h3 prizes
-
-          .panel
+          .panel(v-if="lifes > 0 || running")
             .half1
               prize(
                 v-for="(p, index) in prizes.slice(0, 4)"
@@ -26,6 +27,17 @@
                 :note="p.note"
               )
 
+          .panel-end(v-if="lifes == 0 && !running") 
+            .game-over 
+              h2 
+                span.gold-icon(v-for="(i, index) in 4") 
+                  font-awesome-icon(:icon="company[4-i]")
+                span Game Over
+                span.gold-icon(v-for="(i, index) in 4") 
+                  font-awesome-icon(:icon="company[i-1]")
+              button.send-button(@click="restart") send CV
+                span.cv-icon 
+                  font-awesome-icon(:icon="cv")
           h3
           .c1 
             rule(v-for="(i, index) in icons.slice(0,7)"
@@ -66,6 +78,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faIdBadge, faMailBulk } from '@fortawesome/free-solid-svg-icons'
 import Lever from '@/components/lever'
 import Prize from '@/components/prize'
 import Psycodelia from '@/components/psycodelia'
@@ -91,6 +104,8 @@ export default {
 
   data() {
     return {
+      badge: faIdBadge,
+      cv: faMailBulk,
       timeline: null
     }
   },
@@ -143,22 +158,27 @@ export default {
           function() {
             resolve()
           },
-          winFlag || _.lifes === 0 ? 2500 : 0
+          winFlag ? 2500 : 0
         )
       })
 
       p.then(function() {
         _.setRunning(false)
 
-        if (_.lifes === 0) {
-          _.$router.push('gameover')
-        }
+        // if (_.lifes === 0) {
+        //   _.$router.push('gameover')
+        // }
       })
     },
 
     play(t) {
       this.$refs.lev.play(t)
       this.$refs.psyco.play(t)
+    },
+
+    restart() {
+      this.setLifes(3)
+      this.$router.push('game')
     },
 
     run() {
@@ -200,6 +220,13 @@ body {
 h1,
 a {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.badges {
+  float: right;
+  margin: 10px 10px 0px 0px;
+  font-size: 32px;
+  color: purple;
 }
 
 .topdiv {
@@ -274,8 +301,17 @@ a {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
 }
 
+.cv-icon {
+  padding-left: 5px;
+}
+
 .panel {
   background-color: white;
+  border-radius: 10px;
+}
+
+.panel-end {
+  background-color: #272626;
   border-radius: 10px;
 }
 
@@ -301,6 +337,28 @@ a {
 .half1,
 .half2 {
   border-radius: 10px;
+}
+
+.game-over {
+  width: 100%;
+  text-align: center;
+  height: 90px;
+  padding: 10px 0px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.game-over h2 {
+  color: gold;
+}
+
+.game-over .cv-icon {
+  color: gold;
+}
+
+.gold-icon {
+  padding: 5px;
+  font-size: x-small;
 }
 
 .group {
@@ -370,6 +428,15 @@ a {
   color: darkorange;
 }
 
+.send-button {
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 3px 7px;
+  margin-top: 10px;
+  background-color: gray;
+  border: darkslategrey;
+}
+
 @media only screen and (min-width: 600px) {
   #tm {
     /* border-style: solid; */
@@ -404,6 +471,10 @@ a {
   }
 
   .leverComp {
+    display: none;
+  }
+
+  .badges {
     display: none;
   }
 

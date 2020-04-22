@@ -3,7 +3,6 @@
         p.combination 
             span(v-for="ic in icons") 
                 font-awesome-icon(:icon="ic")
-        //- p.num(v-if="!!prize") {{prize}}
         p.note(v-if="!!note") {{note}}
 </template>
 
