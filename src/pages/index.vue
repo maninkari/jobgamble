@@ -10,7 +10,7 @@
         ) 
           font-awesome-icon(:icon="badge")
       h2.subtitle The Job Gamble
-      p Where Dreams Come True
+      p ~ Where Dreams Come True ~ 😅
 </template>
 
 <script>

@@ -26,7 +26,7 @@ export const state = () => ({
   icons: [
     { icon: faBrain, desc: 'brain' },
     { icon: faGem, desc: 'diamond' },
-    { icon: faMask, desc: 'double-faced' },
+    { icon: faMask, desc: 'two-faced' },
     { icon: faLeaf, desc: 'eco' },
     { icon: faSkullCrossbones, desc: 'evil' },
     { icon: faPeace, desc: 'good' },

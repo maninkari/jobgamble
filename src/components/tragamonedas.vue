@@ -35,7 +35,7 @@
                 span Game Over
                 span.gold-icon(v-for="(i, index) in 4") 
                   font-awesome-icon(:icon="company[i-1]")
-              button.send-button(@click="restart") send CV
+              button.send-button(@click="restart") insert CV
                 span.cv-icon 
                   font-awesome-icon(:icon="cv")
           h3
