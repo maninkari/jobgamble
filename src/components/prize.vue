@@ -3,7 +3,7 @@
         p.combination 
             span(v-for="ic in icons") 
                 font-awesome-icon(:icon="ic")
-        p.note(v-if="!!note") {{note}}
+        p.note(v-if="!!prize") ${{prize}}
 </template>
 
 <script>
@@ -68,7 +68,7 @@ p.note {
   }
 
   p.note {
-    font-size: x-small;
+    font-size: small;
     width: 52%;
   }
 

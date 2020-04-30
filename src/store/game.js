@@ -83,37 +83,37 @@ export const state = () => ({
   prizes: [
     {
       combination: [faGem, faGem, faGem],
-      prize: "1'000'000",
+      prize: "750'000",
       note: 'WIN WIN WIN'
     },
     {
+      combination: [faHandHoldingUsd, faHandHoldingUsd, faHandHoldingUsd],
+      prize: "750'000",
+      note: 'WIN'
+    },
+    {
       combination: [faHeart, faHeart, faHeart],
-      prize: "729'000",
+      prize: "500'000",
       note: 'WIN WIN WIN'
     },
     {
       combination: [faMedal, faMedal, faMedal],
-      prize: "512'000",
-      note: 'WIN WIN'
-    },
-    {
-      combination: [faHandHoldingUsd, faHandHoldingUsd, faHandHoldingUsd],
-      prize: "512'000",
-      note: 'WIN'
-    },
-    {
-      combination: [faPeace, faHatWizard, faBrain],
-      prize: "512'000",
+      prize: "500'000",
       note: 'WIN WIN'
     },
     {
       combination: [faSpaceShuttle, faUserAstronaut, faUserAstronaut],
-      prize: "512'000",
+      prize: "350'000",
+      note: 'WIN WIN'
+    },
+    {
+      combination: [faPeace, faHatWizard, faBrain],
+      prize: "200'000",
       note: 'WIN WIN'
     },
     {
       combination: [faLeaf, faJedi, faBrain],
-      prize: "512'000",
+      prize: "100'000",
       note: 'WIN WIN'
     }
   ]
