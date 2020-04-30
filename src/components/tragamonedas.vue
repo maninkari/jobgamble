@@ -106,7 +106,14 @@ export default {
     return {
       badge: faIdBadge,
       cv: faMailBulk,
-      timeline: null
+      timeline: null,
+      sound: {
+        ambience: null,
+        coins: null,
+        apegio: null,
+        lever: null,
+        hit: null
+      }
     }
   },
 
@@ -122,7 +129,25 @@ export default {
     })
   },
 
-  mounted() {},
+  mounted() {
+    this.sound = {
+      ambience: new Audio('/casino-ambience.mp3'),
+      coins: new Audio('/casino-coins.mp3'),
+      arpegio: new Audio('/casino-arpegio.mp3'),
+      lever: new Audio('/casino-lever.mp3'),
+      hit: new Audio('/casino-hit.mp3')
+    }
+
+    this.sound.ambience.addEventListener(
+      'ended',
+      () => {
+        this.currentTime = 0
+        this.play()
+      },
+      false
+    )
+    this.sound.ambience.play()
+  },
 
   methods: {
     ...mapMutations({
@@ -154,6 +179,13 @@ export default {
       const _ = this
 
       const p = new Promise(function(resolve, reject) {
+        if (winFlag) {
+          _.sound.arpegio.play()
+          _.sound.coins.play()
+        } else {
+          _.sound.hit.play()
+        }
+
         setTimeout(
           function() {
             resolve()
@@ -178,13 +210,13 @@ export default {
 
     restart() {
       this.setLifes(3)
-      this.$router.push('game')
     },
 
     run() {
       if (this.running || this.lifes === 0) return
 
       this.setRunning(true)
+      this.sound.lever.play()
 
       this.$refs.r1.spin()
       this.$refs.r2.spin()
