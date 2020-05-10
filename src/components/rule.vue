@@ -71,11 +71,8 @@ p.comment {
   margin: 0px 3px;
 }
 
-.selected {
-  color: grey;
-}
-
 .selected .comment {
+  color: grey;
   background-color: aliceblue;
 }
 

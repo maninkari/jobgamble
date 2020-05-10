@@ -108,11 +108,11 @@ export default {
       cv: faMailBulk,
       timeline: null,
       sound: {
-        ambience: new Audio('/casino-ambience.mp3'),
-        coins: new Audio('/casino-coins.mp3'),
-        arpegio: new Audio('/casino-arpegio.mp3'),
-        lever: new Audio('/casino-lever.mp3'),
-        hit: new Audio('/casino-hit.mp3')
+        ambience: null,
+        coins: null,
+        arpegio: null,
+        lever: null,
+        hit: null
       }
     }
   },
@@ -130,6 +130,14 @@ export default {
   },
 
   mounted() {
+    this.sound = {
+      ambience: new Audio('/casino-ambience.mp3'),
+      coins: new Audio('/casino-coins.mp3'),
+      arpegio: new Audio('/casino-arpegio.mp3'),
+      lever: new Audio('/casino-lever.mp3'),
+      hit: new Audio('/casino-hit.mp3')
+    }
+
     this.sound.ambience.addEventListener(
       'ended',
       function() {
