@@ -1,5 +1,5 @@
 <template lang="pug">
-  .rule
+  .rule(:class="[inCombination() ? 'selected' : '']")
     p.col
       span
         font-awesome-icon(:icon="icon")
@@ -8,6 +8,7 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Rule',
@@ -29,6 +30,24 @@ export default {
 
   data() {
     return {}
+  },
+
+  computed: {
+    ...mapGetters({
+      combination: 'game/getCombination'
+    })
+  },
+
+  methods: {
+    inCombination() {
+      for (let i = 0; i < this.combination.length; i++) {
+        if (this.icon.iconName === this.combination[i]) {
+          return true
+        }
+      }
+
+      return false
+    }
   }
 }
 </script>
@@ -50,6 +69,14 @@ p.comment {
 
 .rule p span {
   margin: 0px 3px;
+}
+
+.selected {
+  color: grey;
+}
+
+.selected .comment {
+  background-color: aliceblue;
 }
 
 @media only screen and (max-width: 600px) {

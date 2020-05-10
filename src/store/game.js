@@ -116,7 +116,8 @@ export const state = () => ({
       prize: "100'000",
       note: 'WIN WIN'
     }
-  ]
+  ],
+  combination: []
 })
 
 export const getters = {
@@ -137,6 +138,9 @@ export const getters = {
   },
   getPrizes(state) {
     return state.prizes
+  },
+  getCombination(state) {
+    return state.combination
   }
 }
 
@@ -146,5 +150,8 @@ export const mutations = {
   },
   setRunning(state, b) {
     state.running = b
+  },
+  setCombination(state, comb) {
+    state.combination = comb
   }
 }

@@ -145,13 +145,20 @@ export default {
   methods: {
     ...mapMutations({
       setLifes: 'setLifes',
-      setRunning: 'game/setRunning'
+      setRunning: 'game/setRunning',
+      setCombination: 'game/setCombination'
     }),
 
     done() {
       this.setLifes(this.lifes - 1)
 
       let winFlag = false
+
+      this.setCombination([
+        this.$refs.r1.selectedIcon,
+        this.$refs.r2.selectedIcon,
+        this.$refs.r3.selectedIcon
+      ])
 
       this.prizes.forEach((item, index) => {
         if (
@@ -202,6 +209,7 @@ export default {
     },
 
     restart() {
+      this.setCombination([])
       this.setLifes(3)
     },
 
@@ -209,6 +217,7 @@ export default {
       if (this.running || this.lifes === 0) return
 
       this.setRunning(true)
+      this.setCombination([])
       this.sound.lever.play()
 
       this.$refs.r1.spin()
